@@ -3,6 +3,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 
 public class TennisGameTest {
@@ -121,7 +123,31 @@ public class TennisGameTest {
     }
 
    
+    //MUTATIONS
+    
+    
+    
+    
+    @Test
+    public void testGetScoreForPoints() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        TennisGame game = new TennisGame();
 
+        try {
+            Method getScoreMethod = TennisGame.class.getDeclaredMethod("getScore", int.class);
+            getScoreMethod.setAccessible(true);
+
+            // Test for points 0, 1, 2, 3
+            assertEquals("love", getScoreMethod.invoke(game, 0));
+            assertEquals("15", getScoreMethod.invoke(game, 1));
+            assertEquals("30", getScoreMethod.invoke(game, 2));
+            assertEquals("40", getScoreMethod.invoke(game, 3));
+
+            // Test for an out-of-range value (e.g., -1)
+            assertEquals("love", getScoreMethod.invoke(game, 0));
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
    
     
     
