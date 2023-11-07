@@ -16,7 +16,7 @@ public class TennisGame {
             gameEnded = true;
     }
 
-    private String getScore(int points) {
+     String getScore(int points) {
         switch (points) {
             case 0:
                 return "love";
